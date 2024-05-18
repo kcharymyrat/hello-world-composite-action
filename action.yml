@@ -1,7 +1,7 @@
 name: "Hello World"
 description: "Greet someone"
 inputs:
-  who-to-greet: # id of the input
+  who-to-greet:
     description: "Greet"
     required: true
     default: "world"
@@ -15,16 +15,16 @@ runs:
       env:
         GITHUB_ACTION_PATH: ${{ github.action_path }}
 
-    - name: Set executable permissions
-      run: chmod +x hello.sh
+    - name: Set executable permissions for hello.sh
+      run: chmod +x ${{ github.action_path }}/hello.sh
       shell: bash
 
-    - name: Set executable permissions
-      run: chmod +x goodbye.sh
+    - name: Set executable permissions for goodbye.sh
+      run: chmod +x ${{ github.action_path }}/goodbye.sh
       shell: bash
 
     - name: Run hello.sh
-      run: hello.sh
+      run: ${{ github.action_path }}/hello.sh
       shell: bash
 
     - name: Set Greeting
@@ -32,5 +32,5 @@ runs:
       shell: bash
 
     - name: Run goodbye.sh
-      run: goodbye.sh
+      run: ${{ github.action_path }}/goodbye.sh
       shell: bash
